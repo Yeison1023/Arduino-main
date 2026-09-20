@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="arduino.css">
+    <link rel="icon" href="icono.png" type=".../img/cristiano.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css" integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <title>Arduino 2</title>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo-container">
+            <img class = "imagen" src="/img/Vigiroom.jpg" alt="LogoVigiroom"></span>
+            <span class="nombre-vigi">VigiRoom</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#" class="home-vigi">Home</a>
+            <div class="profile-icon">&#128100;</div> </nav>            
+            <a href="index.html" class="home-vigi">Arudino</a>
+            </nav>
+    </header>
+
+    <div class="fondo-pagina">
+     <main class="main-content">
+        <img class="Logo-mitad" src="/img/Vigiroom.jpg" alt="LogoVigiroom">
+    </main>
+
+
+     <section class="debajo-container">
+        <h1 class="debajo">VigiRoom</h1>
+        <h2 class="descripcion">Proceso Del Proyecto</h2>
+    </section>
+
+
+<section class="problema">
+    <h1 class="el-problema">
+        <span>Nuestra idea</span>
+    </h1>
+    <hr class="linea-divide">
+    <div class="problemas">     
+        <div class="tarjetas-lista">
+            <div class="tarjeta">
+                <div class="icono-contenedor">
+                        <i class="fa-brands fa-cc-apple-pay"></i>
+                </div>
+                <main class="contenido-tarjeta">
+                    <h3> ¿Qué queremos construir?</h3>
+                    <p>Queremos construir un sistema de alarma antirrobo automatizado para habitaciones, diseñado para detectar accesos no autorizados en tiempo real y
+                    emitir alertas inmediatas (auditivas, visuales o digitales) que garanticen la seguridad del espacio.</p>
+                </main>
+            </div>
+
+            <div class="tarjeta">
+                <div class="icono-contenedor">
+                        <i class="fa-solid fa-crow"></i>
+                </div>
+                <div class="contenido-tarjeta">
+                    <h3>¿Por qué escogimos esta idea?</h3>
+                    <p>Escogimos esta idea porque resuelve la necesidad real de proteger la privacidad y prevenir robos en espacios personales mediante un proyecto económico y viable, lo que nos permite aplicar de forma práctica conceptos clave de programación (como variables 
+                        y condicionales) con la posibilidad de escalar el sistema a futuro hacia una solución más avanzada o inteligente.</p>
+                </div>
+            </div>
+
+            <div class="tarjeta">
+                <div class="icono-contenedor">
+                <i class="fa-brands fa-optin-monster"></i>
+                </div>
+                <div class="contenido-tarjeta">
+                    <h3>¿Qué problema queremos solucionar?</h3>
+                    <p>El problema que queremos solucionar es la vulnerabilidad y la falta de seguridad en espacios privados,
+                        Muchas personas no cuentan con la tranquilidad de dejar sus espacios solos o de descansar sin el temor de que alguien entre sin su consentimiento. Al no disponer de sistemas de seguridad complejos o costosos, se genera una necesidad de contar con una solución accesible, automatizada e inmediata que alerte sobre cualquier intrusión en tiempo real.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+ </section>
+
+
+   <h1 class="el-problema">
+    <span>Qué investigamos</span>
+</h1>
+<hr class="linea-divide">
+
+<section class="parallax-container2">
+    <nav class="innvestigaa">
+        <article class="tarjetass">
+            <main class="contenido-tarjetass">
+                
+                <h3>¿Qué necesitamos aprender?</h3>
+                <ul class="lista-aprendizaje">
+                    <li><strong>Lógica de programación:</strong> Mentalidad y estructura para resolver problemas y dar instrucciones a una computadora.</li>
+                    <li><strong>Variables y tipos de datos:</strong> Para almacenar estados (ej. <code>let alarmaActivada = true;</code>).</li>
+                    <li><strong>Estructuras condicionales:</strong> Uso de <code>if</code>, <code>else if</code> y <code>else</code> para evaluar las lecturas de los sensores.</li>
+                    <li><strong>Operadores lógicos y de comparación:</strong> Manejo de condiciones complejas (ej. <code>&amp;&amp;</code>, <code>||</code>, <code>==</code>, <code>&lt;</code>).</li>
+                    <li><strong>Bucle principal y funciones:</strong> Estructurar el código para que escuche señales continuamente y ejecute acciones de respuesta.</li>
+                </ul>
+
+                <h3>¿Qué información encontramos?</h3>
+                <p>Por ejemplo, para realizar el proyecto de manera inteligente, conectamos el Arduino a Wi-Fi; para eso necesitamos extensiones de hardware que sean adecuadas para lograrlo.</p>
+
+                <h3>Fuentes consultadas</h3>
+                <p><a href="https://www.tme.com" target="_blank" rel="noopener noreferrer">www.tme.com</a></p>
+
+            </main>
+        </article>
+    </nav>      
+</section>   
+
+  <section class="desing">
+    <main class="imagen-boceto">
+        <img src="/img/boceto.jpg" alt="Boceto">
+    </main>
+
+    <nav class="desing-texto">
+        <h1 class="robot">¿Cómo imaginamos el Robot?</h1>
+        <p class="robot-descripcion">
+            Imaginamos la alarma como un dispositivo residencial de bajo costo, compacto y fácil de usar, diseñado específicamente para resguardar la privacidad de las habitaciones mediante una pequeña central de control con protoboard al lado del marco de la puerta, un sensor magnético en el acceso, un pulsador para conmutar manualmente entre los estados indicados por un LED verde (Armado/Desarmado), y un sistema de disuasión inmediata que activa un LED rojo parpadeante junto a un buzzer con tono de sirena (1000 Hz) en cuanto se detecta una apertura no autorizada.
+        </p>
+
+        <h1 class="robot">¿Qué queremos que haga?</h1>
+        <p class="robot-descripcion">
+            Queremos que el sistema detecte instantáneamente la apertura no autorizada de la puerta mediante el sensor magnético, active de inmediato una alerta sonoro-visual compuesta por la sirena del buzzer y el destello del LED rojo para ahuyentar al intruso, y permita al usuario armar o desarmar fácilmente la protección desde un pulsador manual con confirmación mediante el LED verde.
+        </p>
+    </nav>
+</section>
+
+<section class="materiales">
+                <h1 class="el-problema">
+                    <span>Materiales del Proyecto</span>
+                </h1>
+                <hr class="linea-divide">
+
+    <main class="materiales-usar">
+            <nav class="tarjeta-material">
+                <div class="icono-material">
+                    <i class="fa-solid fa-microchip"></i>
+                </div>
+                <div class="info-material">
+                    <h3>Microcontrolador</h3>
+                    <p><strong>Arduino Uno, ESP32 o Raspberry Pi Pico:</strong> Se encarga de procesar la lógica del código, leer las señales de los sensores y activar las alarmas.</p>
+                </div>
+            </nav>
+
+    
+            <nav class="tarjeta-material">
+                <div class="icono-material">
+                    <i class="fa-solid fa-door-open"></i>
+                </div>
+                <div class="info-material">
+                    <h3>Sensor de entrada</h3>
+                    <p><strong>Sensor magnético o PIR (HC-SR501):</strong> Detecta la apertura no autorizada de la puerta o el movimiento en la habitación en tiempo real.</p>
+                </div>
+            </nav>
+
+            <nav class="tarjeta-material">
+                <div class="icono-material">
+                    <i class="fa-solid fa-bullhorn"></i>
+                </div>
+                <div class="info-material">
+                    <h3>Actuadores de salida</h3>
+                    <p><strong>Buzzer y LEDs (Rojo/Verde):</strong> Emite el tono de sirena de disuasión y muestra mediante luces el estado del sistema (Armado/Alerta).</p>
+                </div>
+            </nav>
+        </main>
+</section>
+
+
+</body>
+</html>

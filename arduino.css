@@ -1,0 +1,639 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    /* background-color: #f8f9fa; */
+    background-color: #caccce; /* Fondo claro para la página */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #ffffff; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    position: fixed; 
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.imagen { 
+    width: 49px;
+    height: 40px;
+    
+}
+
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.nombre-vigi {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333333;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+
+.home-vigi {
+    color: #555555;
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* --- Contenido Principal --- */
+.main-content {
+    padding-top: 80px; /* Compensación por la barra fija */
+    display: flex;
+     justify-content: center;
+    align-items: center;
+  
+}
+
+.Logo-mitad {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; 
+    display: flex; 
+    justify-content: center;
+}
+
+.debajo {
+    text-align: center;
+    font-size: 50px;
+    color: #333333;
+    margin-top: 20px;
+}
+
+.descripcion {
+    text-align: center;
+    font-size: 20px;
+    color: #666666;
+    margin-top: 10px;
+}
+
+.estado-sistema {
+    width: 300px;
+    border-radius: 12px;
+    overflow: hidden;
+    justify-content: center;
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+}
+
+.imagen-sistema {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    
+}
+
+.imagen-arduino {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.texto-sistema {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    
+}
+
+.sistema {
+font-size: 0.75rem;
+  font-weight: 700;
+  color: #4a5568;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.estado{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #718096; /* Color gris */
+  border-radius: 50%; /* Lo hace un círculo perfecto */
+}
+
+.inactivo {
+    font-size: 0.875rem;
+  color: #4a5568;
+}
+
+.fondo-pagina {
+    background-image: url('/img/fondo.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color:rgba(0, 0, 0, 0.1)
+}
+
+.el-problema {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  gap: 10px; 
+  font-size: 20px;
+  color: #333333;
+  margin-top: 50px;
+}
+
+.icono {
+  flex-shrink: 0; 
+}
+
+.fa-solid fa-triangle-exclamation {
+    color: red;
+    
+}
+
+.elproblema {
+    text-align: center;
+    font-size: 11px;
+    color: #333333;
+    margin-top: 20px;
+}
+
+.linea-divide {
+  border: none;
+  border-top: 1px solid #e5e7eb; 
+  margin-top: 12px;               
+  width: 300px;
+
+}
+
+
+.tarjetas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Separación vertical entre tarjetas */
+}
+
+.tarjeta {
+  display: flex;
+  align-items: flex-start; 
+  gap: 16px; 
+  background-color: #fff5f5; 
+  border: 1px solid #fee2e2;   
+  border-radius: 12px;        
+  padding: 20px 24px;
+}
+
+.icono-contenedor {
+  padding-top: 2px; 
+  flex-shrink: 0;   
+}
+
+.contenido-tarjeta h3 {
+  margin: 0 0 6px 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111111;
+}
+
+.contenido-tarjeta p {
+  margin: 0;
+  font-size: 14px;
+  color: #666666;
+  line-height: 1.4;
+}
+
+
+.problemas {
+  max-width: 400px; 
+  margin: 0 auto;
+  padding: 20px;
+}
+
+
+ .parallax-container {
+    width: 100%;
+    height: 600px;
+    overflow: hidden;          
+    position: relative;
+     background-color: rgb(255, 254, 254);
+    } 
+
+
+ .parallax-container div {
+     background-image: url(/img/Arduinoimagen.jpeg);
+     height: 700px;
+     width: 1;
+    background-size: contain;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover; 
+} 
+
+.texto-sistema2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    
+}
+
+
+.icono-sensor {
+  font-size: 18px;    
+  color: #374151;      
+}
+
+.tarjeta-sensor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  padding: 16px 20px;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.sensor-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nombre-sensor {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f2937;
+  letter-spacing: 0.5px;
+}
+
+.badge-estado {
+  background-color: #ebebeb;
+  color: #4b5563;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 6px;
+}
+
+.linea-vertical{
+    width: 2px;
+    height: 50px;
+    background-color: #e5e7eb;
+    margin: 15px auto 15px auto;
+}
+
+.tarjeta-respuesta {
+  background-color: #fcf0f0;    
+  border: 1px solid #f8d7da;    
+  border-radius: 12px;
+  padding: 18px 24px;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+
+.header-respuesta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titulo-respuesta {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.icono-header {
+  color: #b91c1c;
+  font-size: 16px;
+}
+
+
+.linea-separadora {
+  border: none;
+  border-top: 1px solid #f3c7c7;
+  margin: 14px 0 20px 0;
+}
+
+
+.respuesta-activa {
+  display: flex;
+  justify-content: space-around; 
+  align-items: center;
+}
+
+
+.opcion-item {
+  display: flex;
+  flex-direction: column;        /* Alinea el icono encima del texto */
+  align-items: center;
+  gap: 8px;
+}
+
+.icono-rojo {
+  color: #b91c1c;                /* Color rojo oscuro del icono */
+  font-size: 22px;
+}
+
+.opcion-item span {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+    
+
+.problema2 {
+    background-color: #F5F5F5;
+}
+
+
+.componentes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.tarjetas{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #ffffff;
+    border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.nombre-componente {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f2937;
+  letter-spacing: 0.5px;
+}
+
+.problema3 {
+    background-color: #F5F5F5;
+    
+}
+
+.innvestiga {
+  text-align: center;
+  padding: 20px;
+}
+
+ .parallax-container2 {
+  width: 100%;
+  min-height: 100vh; /* Permite que el alto crezca si el texto es largo */
+  position: relative;
+  background-image: url("/img/cristiano.jpg"); 
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed; 
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  box-sizing: border-box;
+}
+
+
+.parallax-container2 div {
+  background-image: none; /* Quitamos la imagen de fondo de los divs hijos */
+  height: auto;
+  width: 100%;
+}
+
+
+/* Contenedor o sección de la tarjeta */
+.innvestigaa {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* Tarjeta contenedora */
+.tarjetass {
+  background-color: #fff5f5;
+  border: 1px solid #fee2e2;
+  border-radius: 12px;
+  max-width: 800px; 
+  width: 100%;
+  padding: 32px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+.contenido-tarjetass {
+  text-align: left; /* Cambia la alineación centrada por texto a la izquierda para mejor lectura */
+}
+
+.contenido-tarjetass h3 {
+  font-size: 1.3rem;
+  color: #1a1a1a;
+  margin-top: 24px;
+  margin-bottom: 12px;
+  border-bottom: 2px solid #fee2e2;
+  padding-bottom: 6px;
+}
+
+.contenido-tarjetass h3:first-child {
+  margin-top: 0;
+}
+
+.contenido-tarjetass p {
+  line-height: 1.6;
+  color: #4a4a4a;
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+}
+
+
+.lista-aprendizaje {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.lista-aprendizaje li {
+  line-height: 1.6;
+  color: #4a4a4a;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.lista-aprendizaje code {
+  background-color: #f1f1f1;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  color: #c7254e;
+}
+
+
+.contenido-tarjeta a {
+  color: #d97706;
+  text-decoration: underline;
+}
+
+
+
+.desing {
+  display: flex;
+  flex-direction: row; /* Alinea la imagen y el texto en horizontal */
+  align-items: center; 
+  gap: 40px; 
+  max-width: 1100px; 
+  margin: 40px auto; 
+  padding: 20px;
+}
+
+/* Columna de la imagen */
+.imagen-boceto {
+  flex: 1; 
+  display: flex;
+  justify-content: center;
+}
+
+.imagen-boceto img {
+  width: 100%;
+  max-width: 550px; 
+  height: auto;
+  border-radius: 12px; 
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); 
+}
+
+/* Columna o contenedor de texto */
+.desing > div, 
+.desing-texto {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+.robot {
+  font-size: 1.8rem;
+  color: #1a1a1a;
+  margin-top: 10px;
+  margin-bottom: 8px;
+  font-weight: 700;
+  border-bottom: 2px solid #fee2e2; 
+  padding-bottom: 6px;
+}
+
+
+.robot-descripcion {
+  font-size: 1rem;
+  line-height: 1.6; /* Interlineado */
+  color: #4a4a4a;
+  margin-bottom: 16px;
+}
+
+/* Adaptación para pantallas de celular */
+/* @media (max-width: 768px) {
+  .desing {
+    flex-direction: column; 
+    gap: 24px;
+  }
+} */
+
+
+
+
+.materiales {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* Cuadrícula para colocar las 3 tarjetas alineadas */
+.materiales-usar {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  margin-top: 30px;
+  align-items: stretch; /* Mantiene la misma altura en todas */
+}
+
+
+.tarjeta-material {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #fff5f5;
+  border: 1px solid #fee2e2;
+  border-radius: 12px;
+  padding: 28px 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta-material:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+.icono-material {
+  font-size: 2rem;
+  color: #dc2626; 
+  background-color: #fef2f2;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+
+.info-material h3 {
+  font-size: 1.25rem;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+}
+
+.info-material p {
+  font-size: 0.95rem;
+  color: #4a4a4a;
+  line-height: 1.6;
+}
+
+
+
+
+
+
+
+
