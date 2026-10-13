@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #caccce; 
+    background-color: #f8f9fa; 
 }
 
 
@@ -15,10 +15,11 @@ body {
     padding: 10px 20px;
     background-color: #ffffff; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-    position: fixed; 
+    position: relative; 
     top: 0;
     width: 100%;
     box-sizing: border-box;
+    z-index: 100;
 }
 
 .imagen { 
@@ -633,6 +634,181 @@ line-height: 1.5;
 }
 
 
+.nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Reduce o aumenta este valor para ajustar qué tan pegados quedan */
+  margin-left: auto;
+}
+
+.home-vigi,
+.avance {
+  color: #555555;
+  text-decoration: none;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-right: 0; /* Removido para que 'gap' controle la distancia */
+}
+
+
+
+
+
+
+
+
+.home-vigi,
+.avance {
+  color: #555555;
+  text-decoration: none;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.avance.active {
+  color: #2b50d8;
+  font-weight: 700;
+  border-bottom: 2px solid #2b50d8;
+  padding-bottom: 2px;
+}
+
+.home-vigi:hover,
+.avance:hover {
+  color: #2b50d8;
+}
+
+/* --- CONTENIDO PRINCIPAL --- */
+.container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.header-title {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.header-title h1 {
+  font-size: 28px;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.header-title p {
+  color: #666666;
+  font-size: 15px;
+}
+
+/* --- GRID DE LAS 6 SEMANAS --- */
+.weeks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.week-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-top: 5px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.week-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+/* Bordes superiores por estado */
+.week-card.completed { border-top-color: #dc2626;; }
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.week-number {
+  font-weight: 700;
+  font-size: 16px;
+  color: #2c3e50;
+}
+
+
+
+.card-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+.card-desc {
+  font-size: 13px;
+  color: #666666;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* --- BOTÓN DRIVE EN CADA TARJETA --- */
+.btn-drive {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: #f1f3f4;
+  color: #3c4043;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #dadce0;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-drive:hover {
+  background-color: #e8eaed;
+  border-color: #c6c6c6;
+  color: #1a73e8;
+}
+
+.drive-icon {
+  width: 18px;
+  height: 18px;
+}
+
+
+
+.nav-center .btn-home,
+.nav-center a {
+  display: inline-flex !important;
+  align-items: center !important;
+  flex-direction: row !important; 
+  gap: 6px;                       
+  text-decoration: none;
+  color: #555555;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
 
 
 
