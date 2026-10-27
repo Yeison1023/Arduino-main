@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Alarma Anti-Robo con Arduino</title>
+  <link rel="stylesheet" href="arduino2.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="main-header">
+      <div class="logo-area">
+        <div class="arduino-icon">
+            <img class = "imagen" src="/img/Vigiroom.jpg" alt="LogoVigiroom"></span>
+        </div>
+        <div>
+          <h1>Simulador de Alarma Anti-Robo</h1>
+          <p class="subtitle">Prototipo Interactiva Virtual • Proyecto Arduino</p>
+        </div>
+      </div>
+      <nav class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('simulator')">Simulador Virtual</button>
+        <button class="tab-btn" onclick="switchTab('mapping')">Equivalencia Hardware</button>
+      </nav>
+    </header>
+
+    <!-- Pestaña 1: Simulador -->
+    <main id="tab-simulator" class="tab-content active">
+      <div class="dashboard-grid">
+        <!-- Panel Izquierdo: Habitación y Sensores -->
+        <section class="card room-card">
+          <h2>
+            Vista de la Habitación
+          </h2>
+          
+          <div class="room-viewport" id="roomViewport">
+            <!-- Rayo del sensor PIR -->
+            <div class="pir-beam" id="pirBeam"></div>
+            
+            <!-- Sensor PIR en la habitación -->
+            <div class="pir-sensor-hardware">
+              <div class="pir-dome"></div>
+              <img class = "imagen" src="/img/Vigiroom.jpg" alt="LogoVigiroom"></span>
+            </div>
+
+            <!-- Siren/Buzzer Físico -->
+            <div class="buzzer-hardware" id="buzzerHw">
+              <div class="speaker-grille"></div>
+            </div>
+
+            <!-- Puerta con indicador -->
+            <div class="door-graphic">
+              <div class="door-knob"></div>
+            </div>
+
+            <!-- Intruso Simulado -->
+            <div class="intruder" id="intruder">
+              <div class="intruder-body">🏃‍♂️</div>
+            </div>
+          </div>
+
+          <div class="controls-panel">
+            <h3>Simulación de Eventos Física</h3>
+            <button class="btn btn-danger btn-block" id="btnSimulateIntruder">
+              ⚠️ Simular Intruso (Sensor PIR)
+            </button>
+            <p class="help-text">Equivale a mover un objeto frente al sensor infrarrojo HC-SR501.</p>
+          </div>
+        </section>
+
+        <!-- Panel Centro: Circuito / Arduino -->
+        <section class="card arduino-card">
+          <h2>
+            Placa de Control & Display
+          </h2>
+
+          <!-- Pantalla LCD 16x2 -->
+          <div class="lcd-screen" id="lcdScreen">
+            <div class="lcd-line" id="lcdLine1">SISTEMA LISTO</div>
+            <div class="lcd-line" id="lcdLine2">CLAVE: _ _ _ _</div>
+          </div>
+
+          <!-- LEDs de Estado -->
+          <div class="led-panel">
+            <div class="led-group">
+              <div class="led-light led-green" id="ledGreen"></div>
+              <span>SISTEMA / OK</span>
+            </div>
+            <div class="led-group">
+              <div class="led-light led-red" id="ledRed"></div>
+              <span>ALERTA / PIR</span>
+            </div>
+          </div>
+
+          <!-- Teclado Numérico -->
+          <div class="keypad-container">
+            <span class="keypad-title">Teclado Matricial 4x4</span>
+            <div class="keypad-grid">
+              <button class="key-btn" onclick="pressKey('1')">1</button>
+              <button class="key-btn" onclick="pressKey('2')">2</button>
+              <button class="key-btn" onclick="pressKey('3')">3</button>
+              <button class="key-btn" onclick="pressKey('4')">4</button>
+              <button class="key-btn" onclick="pressKey('5')">5</button>
+              <button class="key-btn" onclick="pressKey('6')">6</button>
+              <button class="key-btn" onclick="pressKey('7')">7</button>
+              <button class="key-btn" onclick="pressKey('8')">8</button>
+              <button class="key-btn" onclick="pressKey('9')">9</button>
+              <button class="key-btn key-action" onclick="pressKey('*')">*</button>
+              <button class="key-btn" onclick="pressKey('0')">0</button>
+              <button class="key-btn key-action" onclick="pressKey('#')">#</button>
+            </div>
+            <p class="help-text">PIN Por Defecto: <strong>1234</strong> (Presione # para Confirmar, * para Borrar)</p>
+          </div>
+        </section>
+
+        <!-- Panel Derecho: Logs e Historial -->
+        <section class="card log-card">
+          <h2>
+            Terminal de Eventos Serial
+          </h2>
+          <div class="terminal-box" id="terminalBox">
+            <div class="log-entry system">[SISTEMA] Inicializando simulación de Arduino Uno...</div>
+            <div class="log-entry system">[SISTEMA] Pines configurados: PIR (Pin 2), Buzzer (Pin 8), LEDs (Pins 12, 13).</div>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="clearLogs()">Limpiar Consola</button>
+        </section>
+      </div>
+    </main>
+
+    <!-- Pestaña 2: Mapeo de Hardware -->
+    <main id="tab-mapping" class="tab-content">
+      <div class="card">
+        <h2>Equivalencia: Software Interactivo vs. Componentes Físicos</h2>
+        <p class="subtitle">Mapeo conceptual del prototipo virtual con el hardware del proyecto en Arduino.</p>
+        
+        <table class="mapping-table">
+          <thead>
+            <tr>
+              <th>Componente Físico</th>
+              <th>Pin Arduino</th>
+              <th>Elemento Web / Software</th>
+              <th>Función en el Sistema</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Arduino Uno R3</strong></td>
+              <td>—</td>
+              <td>Lógica JavaScript</td>
+              <td>Controlador principal del flujo de la alarma y temporizadores.</td>
+            </tr>
+            <tr>
+              <td><strong>Sensor PIR HC-SR501</strong></td>
+              <td>Pin Digital 2</td>
+              <td>Botón "Simular Intruso"</td>
+              <td>Envía señal HIGH al detectar movimiento o radiación infrarroja.</td>
+            </tr>
+            <tr>
+              <td><strong>Teclado Matricial 4x4</strong></td>
+              <td>Pines 3, 4, 5, 6, 7, 9, 10, 11</td>
+              <td>Teclado Numérico Web</td>
+              <td>Permite la entrada de la clave PIN para armar y desarmar el sistema.</td>
+            </tr>
+            <tr>
+              <td><strong>Pantalla LCD 16x2 (I2C)</strong></td>
+              <td>A4 (SDA), A5 (SCL)</td>
+              <td>Pantalla LCD Azul Simulado</td>
+              <td>Muestra estados en tiempo real (ARMADO, ALERTA, INGRESO DE CLAVE).</td>
+            </tr>
+            <tr>
+              <td><strong>Buzzer Piezoeléctrico</strong></td>
+              <td>Pin Digital 8</td>
+              <td>Sintetizador Web Audio API</td>
+              <td>Genera la frecuencia de tono de la sirena cuando ocurre una intrusión.</td>
+            </tr>
+            <tr>
+              <td><strong>LED Verde / Rojo</strong></td>
+              <td>Pins Digitales 12 y 13</td>
+              <td>Leds de Estado CSS</td>
+              <td>Indicadores ópticos visuales (Verde = Seguro, Rojo Parpadeante = Alarma).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script src="jay.js"></script>
+</body>
+</html>
