@@ -5,6 +5,7 @@ let sistemaArmado = false;
 let estadoAlerta = false;
 let audioCtx = null;
 let oscilador = null;
+let puertoSerie = null;
 
 // Elementos DOM
 const lcdLine1 = document.getElementById('lcdLine1');
@@ -20,7 +21,7 @@ const terminalBox = document.getElementById('terminalBox');
 document.addEventListener('DOMContentLoaded', () => {
   actualizarLCD("SISTEMA DESARMADO", "CLAVE: _ _ _ _");
   ledGreen.classList.add('active');
-  logTerminal("SISTEMA", "Sistema listo. Ingrese clave 1234 y presione # para armar.");
+  logTerminal("SISTEMA", "Sistema listo. Envíe 1234 desde el Monitor Serie o Teclado para activar.");
 });
 
 // Control de pestañas
@@ -29,7 +30,83 @@ function switchTab(tabName) {
   document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
   
   document.getElementById(`tab-${tabName}`).classList.add('active');
-  event.target.classList.add('active');
+  if (event) event.target.classList.add('active');
+}
+
+// -------------------------------------------------------------
+// CONEXIÓN DIRECTA POR PUERTO SERIE (Tinkercad / Arduino Físico)
+// -------------------------------------------------------------
+async function conectarPuertoSerie() {
+  if (!("serial" in navigator)) {
+    alert("Tu navegador no soporta la Web Serial API. Usa Google Chrome o Microsoft Edge.");
+    return;
+  }
+
+  try {
+    puertoSerie = await navigator.serial.requestPort();
+    await puertoSerie.open({ baudRate: 9600 });
+    logTerminal("SISTEMA", "¡Conectado al Puerto Serie de Arduino a 9600 baudios!");
+
+    const textDecoder = new TextDecoderStream();
+    const readableStreamClosed = puertoSerie.readable.pipeTo(textDecoder.writable);
+    const reader = textDecoder.readable.getReader();
+
+    leerDatosSerie(reader);
+  } catch (err) {
+    logTerminal("ALERTA", "Error al conectar con el Puerto Serie: " + err.message);
+  }
+}
+
+async function leerDatosSerie(reader) {
+  let buffer = "";
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) {
+      reader.releaseLock();
+      break;
+    }
+    if (value) {
+      buffer += value;
+      let lineas = buffer.split("\n");
+      buffer = lineas.pop(); // Guardar fragmento incompleto
+
+      for (let linea of lineas) {
+        procesarMensajeArduino(linea.trim());
+      }
+    }
+  }
+}
+
+// Procesa lo que responde el Serial.println() del código de Tinkercad
+function procesarMensajeArduino(mensaje) {
+  if (!mensaje) return;
+  logTerminal("ARDUINO", mensaje);
+
+  if (mensaje.includes("Alarma Activada")) {
+    sistemaArmado = true;
+    actualizarLCD("SISTEMA ARMADO", "MONITOREANDO PIR");
+    ledGreen.classList.remove('active');
+    ledRed.classList.add('active');
+  } else if (mensaje.includes("Movimiento Detectado")) {
+    estadoAlerta = true;
+    animarIntruso();
+    actualizarLCD("¡INTRUSO DETECTADO!", "INGRESE CLAVE");
+    ledRed.classList.add('blink');
+    buzzerHw.classList.add('sounding');
+    iniciarSirena();
+  } else if (mensaje.includes("Alarma desactivada")) {
+    desactivarAlarmaLocal();
+  }
+}
+
+// Enviar comandos escritos en la Web hacia el Arduino por Serial
+async function enviarDatoSerie(texto) {
+  if (puertoSerie && puertoSerie.writable) {
+    const encoder = new TextEncoder();
+    const writer = puertoSerie.writable.getWriter();
+    await writer.write(encoder.encode(texto + "\n"));
+    writer.releaseLock();
+  }
 }
 
 // Lógica del Teclado Numérico
@@ -56,15 +133,17 @@ function pressKey(key) {
 
 // Verificación de PIN
 function verificarPin() {
+  enviarDatoSerie(pinIngresado); // Enviar clave al Serial.parseInt() de Tinkercad
+
   if (pinIngresado === PIN_CORRECTO) {
     if (estadoAlerta) {
-      desactivarAlarma();
+      desactivarAlarmaLocal();
     } else {
       sistemaArmado = !sistemaArmado;
       if (sistemaArmado) {
-        armarSistema();
+        armarSistemaLocal();
       } else {
-        desarmarSistema();
+        desarmarSistemaLocal();
       }
     }
   } else {
@@ -77,21 +156,14 @@ function verificarPin() {
   pinIngresado = "";
 }
 
-// Armar Sistema
-function armarSistema() {
-  actualizarLCD("ARMANDO EN 3s...", "POR FAVOR SALGA");
-  logTerminal("INFO", "Iniciando secuencia de armado...");
-
-  setTimeout(() => {
-    actualizarLCD("SISTEMA ARMADO", "MONITOREANDO PIR");
-    ledGreen.classList.remove('active');
-    ledRed.classList.add('active');
-    logTerminal("INFO", "Sistema ARMADO y vigilando el sensor PIR.");
-  }, 3000);
+function armarSistemaLocal() {
+  actualizarLCD("SISTEMA ARMADO", "MONITOREANDO PIR");
+  ledGreen.classList.remove('active');
+  ledRed.classList.add('active');
+  logTerminal("INFO", "Sistema ARMADO.");
 }
 
-// Desarmar Sistema
-function desarmarSistema() {
+function desarmarSistemaLocal() {
   actualizarLCD("SISTEMA DESARMADO", "CLAVE: _ _ _ _");
   ledGreen.classList.add('active');
   ledRed.classList.remove('active', 'blink');
@@ -99,10 +171,17 @@ function desarmarSistema() {
   logTerminal("INFO", "Sistema desarmado por usuario.");
 }
 
+function desactivarAlarmaLocal() {
+  estadoAlerta = false;
+  sistemaArmado = false;
+  buzzerHw.classList.remove('sounding');
+  desarmarSistemaLocal();
+}
+
 // Simular Intruso (Sensor PIR)
 document.getElementById('btnSimulateIntruder').addEventListener('click', () => {
   if (!sistemaArmado) {
-    logTerminal("SISTEMA", "Movimiento detectado por PIR, pero el sistema está DESARMADO (Ignores).");
+    logTerminal("SISTEMA", "Movimiento detectado por PIR, pero el sistema está DESARMADO.");
     animarIntruso();
     return;
   }
@@ -111,13 +190,11 @@ document.getElementById('btnSimulateIntruder').addEventListener('click', () => {
 
   estadoAlerta = true;
   animarIntruso();
-  
-  actualizarLCD("¡INTRUSO DETECTADO!", "INGRESET CLAVE!");
+  actualizarLCD("¡INTRUSO DETECTADO!", "INGRESE CLAVE");
   ledRed.classList.add('blink');
   buzzerHw.classList.add('sounding');
-  
   iniciarSirena();
-  logTerminal("ALERTA", "¡ALERTA! Sensor PIR detectó movimiento en Pin 2. Sirena activada.");
+  logTerminal("ALERTA", "¡ALERTA! Sensor PIR detectó movimiento (Pin A0).");
 });
 
 function animarIntruso() {
@@ -130,22 +207,12 @@ function animarIntruso() {
   }, 2500);
 }
 
-// Desactivar estado de alerta
-function desactivarAlarma() {
-  estadoAlerta = false;
-  sistemaArmado = false;
-  buzzerHw.classList.remove('sounding');
-  desarmarSistema();
-  logTerminal("INFO", "Alarma desactivada con éxito.");
-}
-
-// Pantalla LCD Helper
+// Helper LCD & Logs
 function actualizarLCD(l1, l2) {
   lcdLine1.textContent = l1;
   lcdLine2.textContent = l2;
 }
 
-// Logs en Terminal
 function logTerminal(tipo, mensaje) {
   const time = new Date().toLocaleTimeString();
   const entry = document.createElement('div');
@@ -159,7 +226,7 @@ function clearLogs() {
   terminalBox.innerHTML = '';
 }
 
-// Sintetizador Web Audio (Sirena del Buzzer)
+// Sonido Web Audio
 function initAudio() {
   if (!audioCtx) {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -187,7 +254,6 @@ function iniciarSirena() {
   const gain = audioCtx.createGain();
   oscilador.type = 'sawtooth';
   
-  // Modulación de frecuencia tipo sirena
   let f = 600;
   let subiendo = true;
   

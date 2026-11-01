@@ -184,6 +184,62 @@
       </div>
     </main>
   </div>
+  <!-- Pestaña 2: Mapeo de Hardware -->
+<main id="tab-mapping" class="tab-content">
+  <div class="card">
+    <h2>Equivalencia: Software Interactivo vs. Componentes Físicos</h2>
+    <p class="subtitle">Mapeo conceptual del prototipo virtual ajustado al circuito real de Tinkercad.</p>
+    
+    <table class="mapping-table">
+      <thead>
+        <tr>
+          <th>Componente Físico</th>
+          <th>Pin Arduino (Tinkercad)</th>
+          <th>Elemento Web / Software</th>
+          <th>Función en el Sistema</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Arduino Uno R3</strong></td>
+          <td>—</td>
+          <td>Lógica JavaScript (`jay.js`)</td>
+          <td>Procesa el puerto Serie y coordina el estado de la web.</td>
+        </tr>
+        <tr>
+          <td><strong>Sensor PIR (Parallax)</strong></td>
+          <td>Pin Análogo A0</td>
+          <td>Botón "Simular Intruso" / Entrada Serie</td>
+          <td>Envía lectura digital para detectar movimiento.</td>
+        </tr>
+        <tr>
+          <td><strong>LED Amarillo (Estado OK)</strong></td>
+          <td>Pin Digital 5</td>
+          <td>LED Verde Web (`#ledGreen`)</td>
+          <td>Indica que el sistema está encendido/listo.</td>
+        </tr>
+        <tr>
+          <td><strong>Buzzer Piezoeléctrico</strong></td>
+          <td>Pin Digital 6</td>
+          <td>Audio API Web / Animación Bocina</td>
+          <td>Suena cuando la variable `estado == true` y hay intrusión.</td>
+        </tr>
+        <tr>
+          <td><strong>LED Rojo (Alarma)</strong></td>
+          <td>Pin Digital 7</td>
+          <td>LED Rojo Web (`#ledRed`)</td>
+          <td>Parpadea alternadamente durante el estado de alerta.</td>
+        </tr>
+        <tr>
+          <td><strong>Monitor Serie (USB)</strong></td>
+          <td>Puerto COM / USB</td>
+          <td>Terminal de Eventos Serial Web</td>
+          <td>Transmite mensajes como `"Movimiento Detectado"` o `"Alarma Activada"`.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
 
   <script src="jay.js"></script>
 </body>
