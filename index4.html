@@ -15,12 +15,12 @@
         </div>
         <div>
           <h1>Simulador de Alarma Anti-Robo</h1>
-          <p class="subtitle">Prototipo Interactiva Virtual • Proyecto Arduino</p>
+      <p class="subtitle">Prototipo interactivo virtual • Proyecto Arduino</p>
         </div>
       </div>
       <nav class="nav-tabs">
-        <button class="tab-btn active" onclick="switchTab('simulator')">Simulador Virtual</button>
-        <button class="tab-btn" onclick="switchTab('mapping')">Equivalencia Hardware</button>
+        <button class="tab-btn active" onclick="switchTab('simulator', this)">Simulador Virtual</button>
+        <button class="tab-btn" onclick="switchTab('mapping', this)">Equivalencia Hardware</button>
       </nav>
     </header>
 
@@ -29,9 +29,7 @@
       <div class="dashboard-grid">
         <!-- Panel Izquierdo: Habitación y Sensores -->
         <section class="card room-card">
-          <h2>
-            Vista de la Habitación
-          </h2>
+          <h2>Zona protegida</h2>
           
           <div class="room-viewport" id="roomViewport">
             <!-- Rayo del sensor PIR -->
@@ -40,7 +38,7 @@
             <!-- Sensor PIR en la habitación -->
             <div class="pir-sensor-hardware">
               <div class="pir-dome"></div>
-              <img class = "imagen" src="/img/Vigiroom.jpg" alt="LogoVigiroom"></span>
+              <span>PIR</span>
             </div>
 
             <!-- Siren/Buzzer Físico -->
@@ -60,7 +58,7 @@
           </div>
 
           <div class="controls-panel">
-            <h3>Simulación de Eventos Física</h3>
+            <h3>Prueba del sensor</h3>
             <button class="btn btn-danger btn-block" id="btnSimulateIntruder">
               ⚠️ Simular Intruso (Sensor PIR)
             </button>
@@ -70,47 +68,74 @@
 
         <!-- Panel Centro: Circuito / Arduino -->
         <section class="card arduino-card">
-          <h2>
-            Placa de Control & Display
-          </h2>
-
-          <!-- Pantalla LCD 16x2 -->
-          <div class="lcd-screen" id="lcdScreen">
-            <div class="lcd-line" id="lcdLine1">SISTEMA LISTO</div>
-            <div class="lcd-line" id="lcdLine2">CLAVE: _ _ _ _</div>
+          <h2>Arduino Uno y circuito</h2>
+          <p class="circuit-intro">Vista virtual del montaje de la alarma, basada en tu circuito de Tinkercad.</p>
+          <div class="circuit-frame" role="img" aria-label="Arduino Uno conectado a un sensor PIR, dos LED y una bocina">
+            <svg class="circuit-svg" viewBox="0 0 760 430" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <linearGradient id="board" x2="0" y2="1"><stop stop-color="#1688a4"/><stop offset="1" stop-color="#08718e"/></linearGradient>
+                <linearGradient id="breadboard" x2="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#e8edf0"/></linearGradient>
+                <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#0f172a" flood-opacity=".2"/></filter>
+              </defs>
+              <!-- Protoboard -->
+              <rect x="350" y="34" width="382" height="188" rx="12" fill="url(#breadboard)" stroke="#cbd5e1" stroke-width="3" filter="url(#shadow)"/>
+              <path d="M365 55H716M365 202H716" stroke="#ef4444" stroke-width="3"/><path d="M365 65H716M365 192H716" stroke="#64748b" stroke-width="3"/>
+              <g fill="#475569">
+                <circle cx="378" cy="88" r="3"/><circle cx="402" cy="88" r="3"/><circle cx="426" cy="88" r="3"/><circle cx="450" cy="88" r="3"/><circle cx="474" cy="88" r="3"/><circle cx="498" cy="88" r="3"/><circle cx="522" cy="88" r="3"/><circle cx="546" cy="88" r="3"/><circle cx="570" cy="88" r="3"/><circle cx="594" cy="88" r="3"/><circle cx="618" cy="88" r="3"/><circle cx="642" cy="88" r="3"/><circle cx="666" cy="88" r="3"/><circle cx="690" cy="88" r="3"/>
+                <circle cx="378" cy="112" r="3"/><circle cx="402" cy="112" r="3"/><circle cx="426" cy="112" r="3"/><circle cx="450" cy="112" r="3"/><circle cx="474" cy="112" r="3"/><circle cx="498" cy="112" r="3"/><circle cx="522" cy="112" r="3"/><circle cx="546" cy="112" r="3"/><circle cx="570" cy="112" r="3"/><circle cx="594" cy="112" r="3"/><circle cx="618" cy="112" r="3"/><circle cx="642" cy="112" r="3"/><circle cx="666" cy="112" r="3"/><circle cx="690" cy="112" r="3"/>
+                <circle cx="378" cy="144" r="3"/><circle cx="402" cy="144" r="3"/><circle cx="426" cy="144" r="3"/><circle cx="450" cy="144" r="3"/><circle cx="474" cy="144" r="3"/><circle cx="498" cy="144" r="3"/><circle cx="522" cy="144" r="3"/><circle cx="546" cy="144" r="3"/><circle cx="570" cy="144" r="3"/><circle cx="594" cy="144" r="3"/><circle cx="618" cy="144" r="3"/><circle cx="642" cy="144" r="3"/><circle cx="666" cy="144" r="3"/><circle cx="690" cy="144" r="3"/>
+              </g>
+              <!-- Arduino Uno -->
+              <g filter="url(#shadow)">
+                <rect x="40" y="144" width="390" height="242" rx="24" fill="url(#board)" stroke="#07566f" stroke-width="5"/>
+                <rect x="40" y="231" width="52" height="77" rx="8" fill="#18212b" stroke="#64748b" stroke-width="3"/>
+                <rect x="82" y="167" width="80" height="33" rx="4" fill="#dbeafe" stroke="#94a3b8" stroke-width="3"/>
+                <rect x="255" y="284" width="150" height="80" rx="10" fill="#18212b" stroke="#64748b" stroke-width="3"/>
+                <rect x="278" y="300" width="104" height="48" rx="4" fill="#0b1220"/>
+                <circle cx="183" cy="327" r="19" fill="#dbeafe" stroke="#94a3b8" stroke-width="4"/><circle cx="227" cy="327" r="19" fill="#dbeafe" stroke="#94a3b8" stroke-width="4"/>
+                <circle cx="378" cy="170" r="11" fill="#ef4444"/><circle cx="378" cy="198" r="7" fill="#fbbf24"/>
+                <text x="120" y="252" fill="#e0f2fe" font-size="25" font-weight="700">Arduino</text><text x="129" y="278" fill="#e0f2fe" font-size="17" font-weight="700">UNO</text>
+                <text x="103" y="190" fill="#334155" font-size="13" font-weight="700">USB</text>
+                <text x="303" y="379" fill="#e0f2fe" font-size="14" font-weight="700">POWER</text>
+              </g>
+              <!-- Pin header -->
+              <g fill="#17212b" stroke="#d9a441" stroke-width="2">
+                <rect x="190" y="132" width="194" height="15" rx="3"/><rect x="103" y="386" width="286" height="14" rx="3"/>
+              </g>
+              <g fill="#e2e8f0" font-size="11" font-weight="700"><text x="200" y="127">DIGITAL</text><text x="231" y="127">5</text><text x="263" y="127">6</text><text x="295" y="127">7</text><text x="329" y="127">8</text><text x="363" y="127">9</text><text x="175" y="418">ANALOG IN</text><text x="210" y="418">A0</text><text x="247" y="418">A1</text><text x="284" y="418">A2</text></g>
+              <!-- Jumper wires from actual pins -->
+              <path d="M231 138V84H468V138" fill="none" stroke="#eab308" stroke-width="5"/>
+              <path d="M263 138V74H544V147" fill="none" stroke="#b45309" stroke-width="5"/>
+              <path d="M295 138V96H505V138" fill="none" stroke="#ef4444" stroke-width="5"/>
+              <path d="M210 393V210H681V166" fill="none" stroke="#8b5cf6" stroke-width="5"/>
+              <path d="M342 145V207H700" fill="none" stroke="#1f2937" stroke-width="5"/>
+              <!-- PIR module -->
+              <rect x="585" y="105" width="108" height="67" rx="8" fill="#176b3a" stroke="#14532d" stroke-width="3"/>
+              <circle cx="639" cy="137" r="25" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="3"/><path d="M639 112Q650 137 639 162M614 137H664" fill="none" stroke="#dbe4ea" stroke-width="3"/>
+              <text x="613" y="101" fill="#14532d" font-size="13" font-weight="700">SENSOR PIR</text>
+              <!-- LEDs + resistors -->
+              <rect x="463" y="161" width="11" height="34" rx="4" fill="#d6a756" stroke="#8b5e2d"/><rect x="500" y="161" width="11" height="34" rx="4" fill="#d6a756" stroke="#8b5e2d"/>
+              <circle id="ledYellowSvg" class="svg-led led-yellow" cx="468" cy="150" r="12"/><circle id="ledRedSvg" class="svg-led led-red-svg" cx="505" cy="150" r="12"/>
+              <text x="446" y="128" fill="#334155" font-size="11" font-weight="700">LED D5</text><text x="487" y="128" fill="#334155" font-size="11" font-weight="700">LED D7</text>
+              <!-- buzzer -->
+              <circle cx="544" cy="174" r="27" fill="#222831" stroke="#111827" stroke-width="4"/><circle cx="544" cy="174" r="9" fill="#64748b"/><text x="524" y="215" fill="#334155" font-size="11" font-weight="700">BOCINA D6</text>
+            </svg>
           </div>
-
-          <!-- LEDs de Estado -->
-          <div class="led-panel">
-            <div class="led-group">
-              <div class="led-light led-green" id="ledGreen"></div>
-              <span>SISTEMA / OK</span>
-            </div>
-            <div class="led-group">
-              <div class="led-light led-red" id="ledRed"></div>
-              <span>ALERTA / PIR</span>
-            </div>
+          <div class="circuit-key">
+            <span><i class="key-dot yellow"></i>LED amarillo · D5</span>
+            <span><i class="key-dot red"></i>LED rojo · D7</span>
+            <span><i class="key-dot dark"></i>Bocina · D6</span>
+            <span><i class="key-dot purple"></i>Sensor PIR · A0</span>
           </div>
-
-          <!-- Teclado Numérico -->
-          <div class="keypad-container">
-            <span class="keypad-title">Teclado Matricial 4x4</span>
-            <div class="keypad-grid">
-              <button class="key-btn" onclick="pressKey('1')">1</button>
-              <button class="key-btn" onclick="pressKey('2')">2</button>
-              <button class="key-btn" onclick="pressKey('3')">3</button>
-              <button class="key-btn" onclick="pressKey('4')">4</button>
-              <button class="key-btn" onclick="pressKey('5')">5</button>
-              <button class="key-btn" onclick="pressKey('6')">6</button>
-              <button class="key-btn" onclick="pressKey('7')">7</button>
-              <button class="key-btn" onclick="pressKey('8')">8</button>
-              <button class="key-btn" onclick="pressKey('9')">9</button>
-              <button class="key-btn key-action" onclick="pressKey('*')">*</button>
-              <button class="key-btn" onclick="pressKey('0')">0</button>
-              <button class="key-btn key-action" onclick="pressKey('#')">#</button>
-            </div>
-            <p class="help-text">PIN Por Defecto: <strong>1234</strong> (Presione # para Confirmar, * para Borrar)</p>
+          <div class="serial-controls">
+            <label for="serialCode">Monitor serie · clave de activación/desactivación</label>
+            <form id="serialForm" class="serial-form">
+              <input id="serialCode" inputmode="numeric" autocomplete="one-time-code" maxlength="4" placeholder="Escribe la clave" aria-label="Código de la alarma">
+              <button class="btn btn-primary" type="submit">Enviar</button>
+            </form>
+            <p class="help-text">Usa <strong>1234</strong> para armar o desarmar. Primero arma la alarma y luego simula movimiento.</p>
           </div>
+          <div class="board-status" aria-live="polite"><span class="status-indicator" id="statusIndicator"></span><span id="boardStatus">Alarma desarmada</span></div>
         </section>
 
         <!-- Panel Derecho: Logs e Historial -->
@@ -120,70 +145,14 @@
           </h2>
           <div class="terminal-box" id="terminalBox">
             <div class="log-entry system">[SISTEMA] Inicializando simulación de Arduino Uno...</div>
-            <div class="log-entry system">[SISTEMA] Pines configurados: PIR (Pin 2), Buzzer (Pin 8), LEDs (Pins 12, 13).</div>
+            <div class="log-entry system">[SISTEMA] Pines del circuito: PIR (A0), bocina (D6), LED amarillo (D5), LED rojo (D7).</div>
           </div>
           <button class="btn btn-secondary btn-sm" onclick="clearLogs()">Limpiar Consola</button>
         </section>
       </div>
     </main>
 
-    <!-- Pestaña 2: Mapeo de Hardware -->
-    <main id="tab-mapping" class="tab-content">
-      <div class="card">
-        <h2>Equivalencia: Software Interactivo vs. Componentes Físicos</h2>
-        <p class="subtitle">Mapeo conceptual del prototipo virtual con el hardware del proyecto en Arduino.</p>
-        
-        <table class="mapping-table">
-          <thead>
-            <tr>
-              <th>Componente Físico</th>
-              <th>Pin Arduino</th>
-              <th>Elemento Web / Software</th>
-              <th>Función en el Sistema</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Arduino Uno R3</strong></td>
-              <td>—</td>
-              <td>Lógica JavaScript</td>
-              <td>Controlador principal del flujo de la alarma y temporizadores.</td>
-            </tr>
-            <tr>
-              <td><strong>Sensor PIR HC-SR501</strong></td>
-              <td>Pin Digital 2</td>
-              <td>Botón "Simular Intruso"</td>
-              <td>Envía señal HIGH al detectar movimiento o radiación infrarroja.</td>
-            </tr>
-            <tr>
-              <td><strong>Teclado Matricial 4x4</strong></td>
-              <td>Pines 3, 4, 5, 6, 7, 9, 10, 11</td>
-              <td>Teclado Numérico Web</td>
-              <td>Permite la entrada de la clave PIN para armar y desarmar el sistema.</td>
-            </tr>
-            <tr>
-              <td><strong>Pantalla LCD 16x2 (I2C)</strong></td>
-              <td>A4 (SDA), A5 (SCL)</td>
-              <td>Pantalla LCD Azul Simulado</td>
-              <td>Muestra estados en tiempo real (ARMADO, ALERTA, INGRESO DE CLAVE).</td>
-            </tr>
-            <tr>
-              <td><strong>Buzzer Piezoeléctrico</strong></td>
-              <td>Pin Digital 8</td>
-              <td>Sintetizador Web Audio API</td>
-              <td>Genera la frecuencia de tono de la sirena cuando ocurre una intrusión.</td>
-            </tr>
-            <tr>
-              <td><strong>LED Verde / Rojo</strong></td>
-              <td>Pins Digitales 12 y 13</td>
-              <td>Leds de Estado CSS</td>
-              <td>Indicadores ópticos visuales (Verde = Seguro, Rojo Parpadeante = Alarma).</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </main>
-  </div>
+    
   <!-- Pestaña 2: Mapeo de Hardware -->
 <main id="tab-mapping" class="tab-content">
   <div class="card">
@@ -203,20 +172,20 @@
         <tr>
           <td><strong>Arduino Uno R3</strong></td>
           <td>—</td>
-          <td>Lógica JavaScript (`jay.js`)</td>
-          <td>Procesa el puerto Serie y coordina el estado de la web.</td>
+          <td>Lógica JavaScript (<code>jay.js</code>)</td>
+          <td>Representa en la página los estados del programa Arduino.</td>
         </tr>
         <tr>
           <td><strong>Sensor PIR (Parallax)</strong></td>
           <td>Pin Análogo A0</td>
-          <td>Botón "Simular Intruso" / Entrada Serie</td>
-          <td>Envía lectura digital para detectar movimiento.</td>
+          <td>Botón «Simular Intruso»</td>
+          <td>Simula una lectura HIGH cuando la alarma está activada.</td>
         </tr>
         <tr>
-          <td><strong>LED Amarillo (Estado OK)</strong></td>
+          <td><strong>LED amarillo</strong></td>
           <td>Pin Digital 5</td>
-          <td>LED Verde Web (`#ledGreen`)</td>
-          <td>Indica que el sistema está encendido/listo.</td>
+          <td>Indicador amarillo virtual</td>
+          <td>Se enciende durante la alerta, según el circuito compartido.</td>
         </tr>
         <tr>
           <td><strong>Buzzer Piezoeléctrico</strong></td>
@@ -225,22 +194,21 @@
           <td>Suena cuando la variable `estado == true` y hay intrusión.</td>
         </tr>
         <tr>
-          <td><strong>LED Rojo (Alarma)</strong></td>
+          <td><strong>LED rojo</strong></td>
           <td>Pin Digital 7</td>
-          <td>LED Rojo Web (`#ledRed`)</td>
+          <td>LED rojo virtual del circuito</td>
           <td>Parpadea alternadamente durante el estado de alerta.</td>
         </tr>
         <tr>
           <td><strong>Monitor Serie (USB)</strong></td>
           <td>Puerto COM / USB</td>
           <td>Terminal de Eventos Serial Web</td>
-          <td>Transmite mensajes como `"Movimiento Detectado"` o `"Alarma Activada"`.</td>
+          <td>Transmite mensajes como Movimiento Detectado o Alarma Activada.</td>
         </tr>
       </tbody>
     </table>
   </div>
 </main>
-
   <script src="jay.js"></script>
 </body>
 </html>

@@ -445,3 +445,119 @@ body {
 .mapping-table tr:hover {
   background: #334155;
 }
+
+/* Circuito virtual de la alarma (pines del montaje de Tinkercad) */
+.circuit-intro {
+  color: #94a3b8;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin: -8px 0 14px;
+}
+
+.circuit-frame {
+  overflow: hidden;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #f8fafc, #e2e8f0);
+  border: 1px solid #475569;
+}
+
+.circuit-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.svg-led {
+  stroke: #7c2d12;
+  stroke-width: 3;
+  transition: fill 0.15s, filter 0.15s;
+}
+
+.led-yellow { fill: #a16207; }
+.led-yellow.is-on { fill: #fde047; filter: drop-shadow(0 0 10px #facc15); }
+.led-red-svg { fill: #991b1b; }
+.led-red-svg.is-on { fill: #fb7185; filter: drop-shadow(0 0 10px #ef4444); }
+
+.circuit-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin: 12px 0 18px;
+  color: #cbd5e1;
+  font-size: 0.72rem;
+}
+
+.circuit-key span { display: inline-flex; align-items: center; gap: 6px; }
+.key-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.key-dot.yellow { background: #eab308; }
+.key-dot.red { background: #ef4444; }
+.key-dot.dark { background: #64748b; }
+.key-dot.purple { background: #8b5cf6; }
+
+.serial-controls {
+  padding: 14px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 9px;
+}
+
+.serial-controls label {
+  display: block;
+  margin-bottom: 9px;
+  color: #cbd5e1;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.serial-form { display: flex; gap: 8px; }
+.serial-form input {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  background: #090d16;
+  color: #f8fafc;
+  font: inherit;
+  letter-spacing: 0.12em;
+}
+.serial-form input:focus { outline: 2px solid #38bdf8; outline-offset: 1px; }
+.btn-primary { background: #0284c7; color: white; white-space: nowrap; }
+
+.serial-controls .help-text { line-height: 1.45; }
+.board-status {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 13px;
+  color: #cbd5e1;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+.status-indicator {
+  flex: 0 0 10px;
+  width: 10px;
+  height: 10px;
+  margin-top: 3px;
+  border-radius: 50%;
+  background: #64748b;
+}
+.status-indicator.armed { background: #facc15; box-shadow: 0 0 9px #facc15; }
+.status-indicator.alert { background: #ef4444; box-shadow: 0 0 10px #ef4444; }
+
+.pir-beam.motion-detected {
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.5) 0%, rgba(239, 68, 68, 0) 70%);
+}
+
+.pir-sensor-hardware span { font-size: 8px; font-weight: 800; }
+
+@media (max-width: 620px) {
+  body { padding: 10px; }
+  .main-header { align-items: flex-start; flex-direction: column; gap: 14px; }
+  .nav-tabs { width: 100%; }
+  .tab-btn { flex: 1; padding: 9px 8px; font-size: 0.78rem; }
+  .logo-area h1 { font-size: 1.15rem; }
+  .circuit-key { font-size: 0.68rem; }
+  .mapping-table { font-size: 0.75rem; }
+  .mapping-table th, .mapping-table td { padding: 8px 6px; }
+}
